@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang = "uk">
+<head>
+  <meta charset = "UTF-8">
+  <meta name    = "viewport" content = "width=device-width, initial-scale=1.0">
+  <title>Система управління завданнями</title>
+  <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <style>
+    body {
+      background : linear-gradient(135deg, #0f0f0f, #1a1a40, #0f3460);
+      color      : #f1f1f1;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height : 100vh;
+    }
+
+    .navbar {
+      background   : linear-gradient(90deg, #0f3460, #16213e);
+      box-shadow   : 0 4px 20px rgba(0, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+    }
+
+    .navbar-brand {
+      color      : #00f7ff !important;
+      font-weight: 600;
+      text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+      transition : all 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+      color      : #ff00c8 !important;
+      text-shadow: 0 0 12px rgba(255, 0, 200, 0.9);
+      transform  : scale(1.05);
+    }
+
+    .navbar-logo {
+      height      : 75px;
+      width       : auto;
+      margin-right: 10px;
+      filter      : drop-shadow(0 0 6px rgba(0, 255, 255, 0.6));
+      transition  : transform 0.3s ease;
+    }
+
+    .navbar-logo:hover {
+      transform: scale(1.1);
+    }
+
+    button[type="submit"] {
+      background   : linear-gradient(90deg, #ff0080, #7928ca);
+      border       : none;
+      color        : #fff;
+      padding      : 6px 14px;
+      border-radius: 8px;
+      font-weight  : 500;
+      box-shadow   : 0 0 12px rgba(255, 0, 200, 0.6);
+      transition   : all 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background: linear-gradient(90deg, #7928ca, #2af598);
+      transform : scale(1.07);
+      box-shadow: 0 0 18px rgba(0, 255, 200, 0.8);
+    }
+
+    .content {
+      margin         : 40px auto;
+      padding        : 20px;
+      max-width      : 900px;
+      background     : rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius  : 16px;
+      box-shadow     : 0 8px 30px rgba(0, 255, 255, 0.2);
+      animation      : fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <nav class = "navbar navbar-expand-lg navbar-dark">
+  <a   class = "navbar-brand d-flex align-items-center" href = "{% url 'tasks:task-list' %}">
+      <img src="media\asn.png" alt="Logo" class="navbar-logo">
+      Головна
+    </a>
+    <a class="navbar-brand" href="{% url 'tasks:register' %}">Реєстрація</a>
+    <form action="{% url 'tasks:logout' %}" method="post" class="ml-auto">
+      {% csrf_token %}
+      <button type="submit">Вихід</button>
+    </form>
+  </nav>
+
+  <div class="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+</html>
